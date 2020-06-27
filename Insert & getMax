@@ -1,0 +1,46 @@
+#include<iostream> 
+using namespace std;  
+class Node  // A tree node 
+{  
+    public: 
+    int data;  
+    Node* left, *right;  
+    /* Constructor that allocates a new  
+    node with the given data and NULL  
+    left and right pointers. */
+    Node(int data) 
+    { 
+        this->data = data; 
+        this->left = NULL; 
+        this->right = NULL; 
+    } 
+};  
+// Returns maximum value in a given --- Binary Tree  
+int findMax(Node* root)  
+{   // Base case  
+    if (root == NULL)  
+        return NULL;  
+        
+    int max = root->data;  
+    int lres = findMax(root->left);  //by using Recursion
+    int rres = findMax(root->right);  
+    if (lres > max)  max = lres;  
+    if (rres > max)  max = rres;  
+    return max;  
+}  
+int main()  
+{  
+    Node*NewRoot = NULL;  
+    Node *root = new Node(2);  //----------2-------//
+    root->left = new Node(7);  
+    root->right = new Node(5);  //------7---2---5---//
+    root->left->right = new Node(6); 
+    root->left->right->left = new Node(1);  
+    root->left->right->right = new Node(11);  
+    root->right->right = new Node(9);  
+    root->right->right->left = new Node(4);
+    //--------7-1-6-11--------2--------5-4-9---------//
+    cout << "\n         Maximum element is " 
+         << findMax(root) << endl;  
+    return 0;  
+}  
